@@ -81,8 +81,7 @@ services:
       - cpca-internal
     ports:
       - "25:25"
-      - "80:80"
-      - "443:443"
+      - "10001:80"
 
 volumes:
   zulip:
