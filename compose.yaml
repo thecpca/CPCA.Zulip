@@ -1,3 +1,4 @@
+---
 services:
 
   memcached:
@@ -18,6 +19,7 @@ services:
       SASL_CONF_PATH: "/home/memcache/memcached.conf"
       MEMCACHED_SASL_PWDB: "/home/memcache/memcached-sasl-db"
       MEMCACHED_PASSWORD_FILE: /run/secrets/zulip__memcached_password
+    attach: false
 
   rabbitmq:
     image: "rabbitmq:4.2"
@@ -38,6 +40,7 @@ services:
       RABBITMQ_PASSWORD_FILE: /run/secrets/zulip__rabbitmq_password
     volumes:
       - "rabbitmq:/var/lib/rabbitmq:rw"
+    attach: false
 
   redis:
     image: "redis:alpine"
@@ -53,11 +56,14 @@ services:
       REDIS_PASSWORD_FILE: /run/secrets/zulip__redis_password
     volumes:
       - "redis:/data:rw"
+    attach: false
 
   zulip:
     image: "ghcr.io/zulip/zulip-server:11.6-1"
-    container_name: "zulip-server"
+    container_name: "zulip"
     restart: unless-stopped
+    build:
+      context: .
     secrets:
       - zulip__postgres_password
       - zulip__memcached_password
@@ -66,10 +72,13 @@ services:
       - zulip__secret_key
       - zulip__email_password
     environment:
-      SETTING_REMOTE_POSTGRES_HOST: "cpca-postgres"
+      # Default hostnames; configure your application in compose.override.yaml
+      SETTING_REMOTE_POSTGRES_HOST: "database"
       SETTING_MEMCACHED_LOCATION: "memcached:11211"
       SETTING_RABBITMQ_HOST: "rabbitmq"
       SETTING_REDIS_HOST: "redis"
+    volumes:
+      - "zulip:/data:rw"
     ulimits:
       nofile:
         soft: 1000000
@@ -78,14 +87,10 @@ services:
       - memcached
       - rabbitmq
       - redis
-    volumes:
-      - "zulip:/data:rw"
-    # Synology cannot handle build+image together; removed build:
     networks:
       - cpca-internal
     ports:
-      - "25:25"
-      - "10001:80"
+      - 10001:80
 
 volumes:
   zulip:
