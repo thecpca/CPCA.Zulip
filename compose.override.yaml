@@ -37,8 +37,8 @@ services:
       ##     https://zulip.readthedocs.io/en/stable/production/settings.html
       ##
       ## The following two settings are required:
-      SETTING_EXTERNAL_HOST: "zulip.example.com"
-      SETTING_ZULIP_ADMINISTRATOR: "zulip-admin@example.com"
+      SETTING_EXTERNAL_HOST: "zulip.thecpca.ca"
+      SETTING_ZULIP_ADMINISTRATOR: "root@thecpca.ca"
 
       ## Most deploys do SSL termination outside of the container; Zulip
       ## defaults to only serving traffic over HTTP. If you'd like this
@@ -66,12 +66,11 @@ services:
       ##
       ## --> https://zulip.readthedocs.io/en/stable/production/email.html
       ##
-      # SETTING_EMAIL_HOST: "smtp.example.com"
-      # SETTING_EMAIL_HOST_USER: "noreply@example.com"
-      # SETTING_EMAIL_PORT: "587"
-      # SETTING_EMAIL_USE_SSL: False
-      # SETTING_EMAIL_USE_TLS: True
-
+      SETTING_EMAIL_HOST: "email-smtp.us-east-2.amazonaws.com"
+      SETTING_EMAIL_HOST_USER: "AKIAYS2NTOYCHEHFBJ7Y"
+      SETTING_EMAIL_PORT: "587"
+      SETTING_EMAIL_USE_SSL: False
+      SETTING_EMAIL_USE_TLS: True
       ## Uncomment to enable the incoming email gateway.  You will need to
       ## ensure that email to emaildomain.example.com is routed to this host
       ## (e.g. via MX record)
@@ -87,7 +86,7 @@ services:
       ##
       ## --> https://zulip.readthedocs.io/projects/docker/en/latest/how-to/compose-authentication.html
       ##
-      # ZULIP_AUTH_BACKENDS: "EmailAuthBackend,GoogleAuthBackend"
+      ZULIP_AUTH_BACKENDS: "zproject.backends.GenericOpenIdConnectBackend"
 
       ## Uncomment this when configuring the mobile push notifications service.
       ## After setting these, you will need to register the server:
@@ -96,8 +95,8 @@ services:
       ##
       ## --> https://zulip.readthedocs.io/en/stable/production/mobile-push-notifications.html
       ##
-      # SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS: True
-      # SETTING_ZULIP_SERVICE_SUBMIT_USAGE_STATISTICS: True
+      SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS: True
+      SETTING_ZULIP_SERVICE_SUBMIT_USAGE_STATISTICS: True
 
       ## By default, files uploaded by users and profile pictures are
       ## stored directly on the Zulip server. You can configure files
