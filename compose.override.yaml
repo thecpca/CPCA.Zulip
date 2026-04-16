@@ -147,7 +147,7 @@ services:
 
     secrets:
       ## Add any additional zulip__ secrets that you defined above.
-      []
+      - zulip__social_auth_oidc_secret
 
     networks:
       - default
