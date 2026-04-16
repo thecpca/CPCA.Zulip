@@ -99,7 +99,7 @@ services:
             "display_name": "your CPCA Account",
             "display_icon": None,
             "client_id": "cpca_zulip",
-            "secret": "social_auth_oidc_secret",
+            "secret": get_secret("social_auth_oidc_secret"),
             "auto_signup": True
           }
         }
