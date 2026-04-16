@@ -92,6 +92,8 @@ services:
       - cpca-internal
     ports:
       - 10001:80
+    extra_hosts:
+      - "auth.thecpca.ca:192.168.168.10"
 
 volumes:
   zulip:
