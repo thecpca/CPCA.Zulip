@@ -88,6 +88,7 @@ services:
       - rabbitmq
       - redis
     networks:
+      - default
       - cpca-internal
     ports:
       - 10001:80
