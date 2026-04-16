@@ -64,6 +64,8 @@ services:
       ## Alternately, you can default to trusting the Docker gateway IP:
       TRUST_GATEWAY_IP: True
 
+      SETTING_REMOTE_POSTGRES_HOST: "cpca-postgres"
+
       ## Outgoing email settings
       ##
       ## --> https://zulip.readthedocs.io/en/stable/production/email.html
@@ -94,8 +96,8 @@ services:
         {
           "cpca": {
             "oidc_url": "https://auth.thecpca.ca",
-            "display_name": "CPCA Account",
-            "display_icon": "https://cdn.thecpca.ca/img/logo-h-red.png",
+            "display_name": "your CPCA Account",
+            "display_icon": "None",
             "client_id": "cpca_zulip",
             "secret": "social_auth_oidc_secret",
             "auto_signup": "True"
@@ -134,6 +136,23 @@ services:
       ## For a complete list of possible settings, see:
       ## --> https://github.com/zulip/zulip/blob/11.x/zproject/prod_settings_template.py
       ##     https://zulip.readthedocs.io/projects/docker/en/latest/reference/environment-vars.html
+
+      HTTP_PROXY: ""
+      HTTPS_PROXY: ""
+      http_proxy: ""
+      https_proxy: ""
+      ALL_PROXY: ""
+      all_proxy: ""
+      NO_PROXY: "localhost,127.0.0.1,auth.thecpca.ca"
+
     secrets:
       ## Add any additional zulip__ secrets that you defined above.
       []
+
+    networks:
+      - default
+      - cpca-internal
+    ports:
+      - 10001:80
+    extra_hosts:
+      - "auth.thecpca.ca:192.168.168.10"
