@@ -27,6 +27,8 @@ secrets:
     environment: "ZULIP__SECRET_KEY"
   zulip__email_password:
     environment: "ZULIP__EMAIL_PASSWORD"
+  zulip__social_auth_oidc_secret:
+    environment: "ZULIP__SOCIAL_AUTH_OIDC_SECRET"
 
 services:
   zulip:
@@ -87,6 +89,20 @@ services:
       ## --> https://zulip.readthedocs.io/projects/docker/en/latest/how-to/compose-authentication.html
       ##
       ZULIP_AUTH_BACKENDS: "GenericOpenIdConnectBackend"
+
+      SETTING_SOCIAL_AUTH_OIDC_ENABLED_IDPS: |
+        {
+          "idp_name": {
+            "oidc_url": "https://auth.thecpca.ca",
+            "display_name": "CPCA Account",
+            "display_icon": "https://cdn.thecpca.ca/img/logo-h-red.png",
+            "client_id": "cpca_zulip",
+            "secret": "social_auth_oidc_secret",
+            "auto_signup": true
+          }
+        }
+
+      SETTING_SOCIAL_AUTH_OIDC_FULL_NAME_VALIDATED: True
 
       ## Uncomment this when configuring the mobile push notifications service.
       ## After setting these, you will need to register the server:

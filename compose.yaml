@@ -79,7 +79,6 @@ services:
       SETTING_REDIS_HOST: "redis"
     volumes:
       - "zulip:/data:rw"
-      - ./conf/settings.py:/etc/zulip/settings.py
     ulimits:
       nofile:
         soft: 1000000
