@@ -112,7 +112,7 @@ services:
             "display_icon": "None",
             "client_id": "cpca_zulip",
             "secret": "social_auth_oidc_secret",
-            "auto_signup": "True"
+            "auto_signup": true
           }
         }
 
