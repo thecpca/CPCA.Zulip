@@ -149,7 +149,7 @@ EMAIL_GATEWAY_IMAP_FOLDER = "INBOX"
 ## enabled.  If you want to disable it, do so after creating the
 ## initial realm and user.
 AUTHENTICATION_BACKENDS: tuple[str, ...] = (
-    "zproject.backends.EmailAuthBackend",  # Email and password; just requires SMTP setup
+    # "zproject.backends.EmailAuthBackend",  # Email and password; just requires SMTP setup
     # "zproject.backends.GoogleAuthBackend",  # Google auth, setup below
     # "zproject.backends.GitHubAuthBackend",  # GitHub auth, setup below
     # "zproject.backends.GitLabAuthBackend",  # GitLab auth, setup below
@@ -158,7 +158,7 @@ AUTHENTICATION_BACKENDS: tuple[str, ...] = (
     # "zproject.backends.SAMLAuthBackend",  # SAML, setup below
     # "zproject.backends.ZulipLDAPAuthBackend",  # LDAP, setup below
     # "zproject.backends.ZulipRemoteUserBackend",  # Local SSO, setup docs on readthedocs
-    # "zproject.backends.GenericOpenIdConnectBackend",  # Generic OIDC integration, setup below
+    "zproject.backends.GenericOpenIdConnectBackend",  # Generic OIDC integration, setup below
 )
 
 ## LDAP integration.
@@ -407,11 +407,11 @@ SOCIAL_AUTH_OIDC_ENABLED_IDPS: dict[str, Any] = {
         ## The display name, used for "Log in with <display name>" buttons.
         "display_name": "CPCA Account",
         ## Optional: URL of an icon to decorate "Log in with <display name>" buttons.
-        "display_icon": None,
+        "display_icon": https://cdn.thecpca.ca/img/logo-h-red.png,
         ## The client_id and secret provided by your OIDC IdP. To keep
         ## settings.py free of secrets, the get_secret call below
         ## reads the secret with the specified name from zulip-secrets.conf.
-        "client_id": "<your client id>",
+        "client_id": "cpca_zulip",
         "secret": get_secret("social_auth_oidc_secret"),
         ## Determines whether "Log in with OIDC" will automatically
         ## register a new account if one does not already exist. By
