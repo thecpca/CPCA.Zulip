@@ -88,11 +88,11 @@ services:
       ##
       ## --> https://zulip.readthedocs.io/projects/docker/en/latest/how-to/compose-authentication.html
       ##
-      ZULIP_AUTH_BACKENDS: "GenericOpenIdConnectBackend"
+      SETTING_ZULIP_AUTH_BACKENDS: "zproject.backends.GenericOpenIdConnectBackend"
 
       SETTING_SOCIAL_AUTH_OIDC_ENABLED_IDPS: |
         {
-          "idp_name": {
+          "cpca": {
             "oidc_url": "https://auth.thecpca.ca",
             "display_name": "CPCA Account",
             "display_icon": "https://cdn.thecpca.ca/img/logo-h-red.png",
