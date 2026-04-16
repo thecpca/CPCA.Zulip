@@ -58,9 +58,9 @@ services:
       ##
       ## --> https://zulip.readthedocs.io/projects/docker/en/latest/how-to/compose-ssl.html#deploying-behind-a-reverse-proxy
       ##
-      # LOADBALANCER_IPS: "10.0.0.0/8"
+      LOADBALANCER_IPS: "192.168.0.0/16"
       ## Alternately, you can default to trusting the Docker gateway IP:
-      # TRUST_GATEWAY_IP: True
+      TRUST_GATEWAY_IP: True
 
       ## Outgoing email settings
       ##
