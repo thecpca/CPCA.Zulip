@@ -16,7 +16,7 @@ DIRECTORIES=(
     "/volume1/docker/cpca-zulip/rabbitmq"
 )
 CONTAINER="cpca-zulip"
-SUID=1654
-SGID=1654
+SUID=1000
+SGID=988
 
 start_bound_container "$SCRIPT_DIR"

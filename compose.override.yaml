@@ -158,5 +158,7 @@ services:
       - "auth.thecpca.ca:192.168.168.10"
 
 networks:
+  reverse-proxy:
+    external: true
   cpca-internal:
     external: true
