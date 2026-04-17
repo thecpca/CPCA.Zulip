@@ -11,9 +11,9 @@ ROOT_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd)"
 source "$ROOT_DIR/start-common.sh"
 
 DIRECTORIES=(
-    "/volume1/docker/cpca_zulip/zulip"
-    "/volume1/docker/cpca_zulip/redis"
-    "/volume1/docker/cpca_zulip/rabbitmq"
+    "/volume1/docker/cpca-zulip/zulip"
+    "/volume1/docker/cpca-zulip/redis"
+    "/volume1/docker/cpca-zulip/rabbitmq"
 )
 CONTAINER="cpca-zulip"
 SUID=1654

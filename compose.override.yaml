@@ -98,7 +98,7 @@ services:
             "oidc_url": "https://auth.thecpca.ca",
             "display_name": "your CPCA Account",
             "display_icon": None,
-            "client_id": "cpca_zulip",
+            "client_id": "cpca-zulip",
             "secret": get_secret("social_auth_oidc_secret"),
             "auto_signup": True
           }
