@@ -60,11 +60,13 @@ services:
       ##
       ## --> https://zulip.readthedocs.io/projects/docker/en/latest/how-to/compose-ssl.html#deploying-behind-a-reverse-proxy
       ##
-      LOADBALANCER_IPS: "192.168.0.0/16"
+      LOADBALANCER_IPS: "172.16.0.0/12"
       ## Alternately, you can default to trusting the Docker gateway IP:
       TRUST_GATEWAY_IP: True
+      SETTING_USE_X_FORWARDED_HOST: True
+      SETTING_SECURE_PROXY_SSL_HEADER: '("HTTP_X_FORWARDED_PROTO", "https")'
 
-      SETTING_REMOTE_POSTGRES_HOST: "cpca-postgres"
+      SETTING_REMOTE_POSTGRES_HOST: "postgres"
 
       ## Outgoing email settings
       ##
@@ -75,6 +77,9 @@ services:
       SETTING_EMAIL_PORT: "587"
       SETTING_EMAIL_USE_SSL: False
       SETTING_EMAIL_USE_TLS: True
+      SETTING_NOREPLY_EMAIL_ADDRESS: "${NOREPLY_EMAIL_ADDRESS:-unattended@thecpca.ca}"
+      SETTING_ADD_TOKENS_TO_NOREPLY_ADDRESS: "${ADD_TOKENS_TO_NOREPLY_ADDRESS:-True}"
+
       ## Uncomment to enable the incoming email gateway.  You will need to
       ## ensure that email to emaildomain.example.com is routed to this host
       ## (e.g. via MX record)
@@ -96,7 +101,7 @@ services:
         {
           "cpca": {
             "oidc_url": "https://auth.thecpca.ca",
-            "display_name": "your CPCA Account",
+            "display_name": "CPCA",
             "display_icon": None,
             "client_id": "cpca-zulip",
             "secret": get_secret("social_auth_oidc_secret"),
@@ -151,11 +156,8 @@ services:
 
     networks:
       - default
-      - cpca-internal
-    ports:
-      - 10001:80
-    extra_hosts:
-      - "auth.thecpca.ca:192.168.168.10"
+      - cpca-internal # PostgreSQL database is on the cpca-internal network, so the app needs to be on it too to connect to the database.
+      - reverse-proxy # The reverse proxy is on the reverse-proxy network, so the app needs to be on it too to receive traffic from the reverse proxy.
 
 networks:
   reverse-proxy:
