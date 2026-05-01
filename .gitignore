@@ -20,3 +20,6 @@
 
 # Built docs
 /docs/_build/
+
+# Bind mounts
+data/
